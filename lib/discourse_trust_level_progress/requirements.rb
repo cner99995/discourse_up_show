@@ -19,8 +19,10 @@ module DiscourseTrustLevelProgress
         level_payload(2, "tl2", tl2_items)
       when 2
         tl3_payload(maintenance: false)
-      else
+      when 3
         tl3_payload(maintenance: true)
+      else
+        max_payload
       end
     end
 
@@ -43,26 +45,37 @@ module DiscourseTrustLevelProgress
       }
     end
 
+    def max_payload
+      {
+        mode: "max",
+        current_trust_level: @user.trust_level,
+        target_trust_level: nil,
+        title: t("title_max"),
+        subtitle: t("subtitle_max"),
+        summary: t("summary_max"),
+        summary_state: "met",
+        alerts: [],
+        footnote: t("footnote"),
+        time_period_days: nil,
+        items: [],
+      }
+    end
+
     def tl1_items
       [
-        min_item(
-          "topics_entered",
-          @stat.topics_entered,
-          SiteSetting.tl1_requires_topics_entered,
-          strict: true,
-        ),
-        min_item(
-          "posts_read",
-          @stat.posts_read_count,
-          SiteSetting.tl1_requires_read_posts,
-          strict: true,
-        ),
+        min_item("topics_entered", @stat.topics_entered, SiteSetting.tl1_requires_topics_entered),
+        min_item("posts_read", @stat.posts_read_count, SiteSetting.tl1_requires_read_posts),
         min_item(
           "time_read",
           @stat.time_read / 60,
           SiteSetting.tl1_requires_time_spent_mins,
           "minutes",
-          strict: true,
+        ),
+        min_item(
+          "account_age",
+          account_age_minutes,
+          SiteSetting.tl1_requires_time_spent_mins,
+          "minutes",
         ),
       ]
     end
@@ -82,14 +95,24 @@ module DiscourseTrustLevelProgress
           SiteSetting.tl2_requires_time_spent_mins,
           "minutes",
         ),
+        min_item(
+          "account_age",
+          account_age_minutes,
+          SiteSetting.tl2_requires_time_spent_mins,
+          "minutes",
+        ),
         min_item("likes_given", @stat.likes_given, SiteSetting.tl2_requires_likes_given),
         min_item("likes_received", @stat.likes_received, SiteSetting.tl2_requires_likes_received),
         min_item(
           "topic_reply_count",
-          @stat.topic_reply_count,
+          @stat.calc_topic_reply_count!,
           SiteSetting.tl2_requires_topic_reply_count,
         ),
       ]
+    end
+
+    def account_age_minutes
+      ((Time.current - @user.created_at) / 60).floor
     end
 
     def tl3_payload(maintenance:)
@@ -176,23 +199,23 @@ module DiscourseTrustLevelProgress
       maintenance ? items.reject { |i| i[:met] } : items
     end
 
-    def min_item(key, value, required, unit = "count", strict: false, hint: nil)
+    def min_item(key, value, required, unit = "count", hint: nil)
       value = value.to_i
       required = required.to_i
       percent =
         if required <= 0
           100
         else
-          [[(value * 100.0 / required).floor, 100].max, 0].max
+          [[(value * 100.0 / required).floor, 100].min, 0].max
         end
 
       {
         key: key,
         label: t("requirements.#{key}"),
         value_text: format_value(value, unit),
-        required_text: "#{strict ? "> " : ""}#{format_value(required, unit)}",
+        required_text: format_value(required, unit),
         percent: percent,
-        met: strict ? value > required : value >= required,
+        met: value >= required,
         hint: hint,
       }
     end

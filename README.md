@@ -4,9 +4,10 @@
 
 ## 行为
 
-- 新用户 / TL1：按 `tl1_requires_*`、`tl2_requires_*` 站点设置逐项对比（与核心升级逻辑的 `>`、`>=` 判断一致）。
-- TL2：直接复用核心的 `TrustLevel3Requirements` 计算 TL3 的 100 天滚动窗口数据（访问天数、浏览/阅读量、点赞、被禁言封禁等），因此数值与后台一致，不是前端近似。
-- TL3 / TL4：显示保级状态，只列出低于保级线的项，并提示 grace period。
+- 新用户 / TL1：按 `tl1_requires_*`、`tl2_requires_*` 站点设置逐项对比，指标和 `>=` 判断与核心 `lib/promotion.rb` 的 `Promotion.tl1_met?` / `tl2_met?` 一致（包含账号注册时长要求）。
+- TL2：直接复用核心的 `TrustLevel3Requirements` 计算 TL3 的滚动窗口数据（访问天数、浏览/阅读量、点赞、被禁言封禁等），窗口长度取 `tl3_time_period` 设置（默认 100 天，可与后台核对），因此数值与后台一致，不是前端近似。
+- TL3：显示保级状态，只列出低于保级线的项，并提示 grace period。
+- TL4：说明 TL4 由管理员手动授予，不展示自动升降级指标。
 - 卡片只在本人摘要页渲染；接口 `/trust-level-progress.json` 需要登录，且只返回当前登录用户的数据，不接收用户名参数。
 
 ## 安装（Docker 标准安装）
