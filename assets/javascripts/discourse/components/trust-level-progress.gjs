@@ -1,6 +1,7 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
 import { service } from "@ember/service";
+import { i18n } from "discourse-i18n";
 import { ajax } from "discourse/lib/ajax";
 
 export default class TrustLevelProgress extends Component {
