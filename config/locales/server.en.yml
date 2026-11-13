@@ -10,6 +10,7 @@ en:
     title_max: "You are at the highest trust level, TL%{level}"
     subtitle_level: "Once every requirement below is met, the system promotes you to TL%{target} automatically."
     subtitle_tl3: "TL3 is evaluated over a rolling %{days}-day window. When every requirement is met the system promotes you automatically."
+    subtitle_maintenance: "You are at TL3. These are the requirements you currently miss and which could demote you; meeting them keeps your level."
     subtitle_max: "TL4 is granted manually by staff and is not affected by automatic promotion or demotion."
     summary_remaining: "%{count} requirements left"
     summary_met: "All requirements met"

@@ -10,6 +10,7 @@ zh_CN:
     title_max: "当前为最高信任等级 TL%{level}"
     subtitle_level: "下面每一项都达标后，系统会自动把你提升到 TL%{target}。"
     subtitle_tl3: "TL3 以最近 %{days} 天为滚动窗口统计，全部达标后系统会自动升级。"
+    subtitle_maintenance: "你已达到 TL3，下面是当前未达标、可能导致降级的条件；全部达标即可稳住等级。"
     subtitle_max: "TL4 由管理员手动授予，不受自动升降级影响，没有需要对照的指标。"
     summary_remaining: "还差 %{count} 项"
     summary_met: "已满足全部条件"
