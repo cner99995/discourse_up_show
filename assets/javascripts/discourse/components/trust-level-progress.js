@@ -1,6 +1,6 @@
 import Component from "@glimmer/component";
 import { tracked } from "@glimmer/tracking";
-import { inject as service } from "@ember/service";
+import { service } from "@ember/service";
 import { ajax } from "discourse/lib/ajax";
 
 export default class TrustLevelProgress extends Component {
@@ -14,7 +14,13 @@ export default class TrustLevelProgress extends Component {
   constructor(owner, args) {
     super(owner, args);
 
-    if (this.ownsProfile) {
+    // `router.currentURL` can still point at the previous route while the
+    // component is constructed, so when the outlet gives us no user we cannot
+    // tell whose profile this is yet. In that case fetch anyway; the endpoint
+    // only ever returns data for the signed-in user.
+    const hasOutletUser = Boolean(this.args?.outletArgs?.user);
+
+    if (this.currentUser?.username && (this.ownsProfile || !hasOutletUser)) {
       this.load();
     }
   }
