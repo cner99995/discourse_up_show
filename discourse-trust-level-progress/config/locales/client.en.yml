@@ -1,0 +1,4 @@
+en:
+  js:
+    trust_level_progress:
+      load_failed: "Could not load your trust level progress. Please refresh the page."

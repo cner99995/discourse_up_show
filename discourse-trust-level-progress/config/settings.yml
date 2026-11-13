@@ -1,0 +1,4 @@
+plugins:
+  trust_level_progress_enabled:
+    default: true
+    client: true

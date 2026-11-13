@@ -1,0 +1,44 @@
+en:
+  admin:
+    site_settings:
+      trust_level_progress_enabled:
+        title: "Trust level progress card"
+        description: "Show users their own item-by-item progress toward the next trust level on their profile summary page."
+  discourse_trust_level_progress:
+    title: "Progress to TL%{target} (currently TL%{current})"
+    title_maintenance: "TL%{level} retention status"
+    subtitle_level: "Once every requirement below is met, the system promotes you to TL%{target} automatically."
+    subtitle_tl3: "TL3 is evaluated over a rolling %{days}-day window. When every requirement is met the system promotes you automatically."
+    subtitle_max: "You are at the highest trust level. These are the TL3 retention requirements that could demote you."
+    summary_remaining: "%{count} requirements left"
+    summary_met: "All requirements met"
+    summary_maintenance_ok: "All retention requirements met"
+    summary_maintenance_lost: "%{count} requirements below the retention threshold"
+    hint_site_share: "Scaled against site-wide activity over the last %{days} days"
+    alerts:
+      grace_period: "You are in the TL3 grace period. Catch up on the missing requirements to keep TL3."
+      requirements_lost: "You are below the TL3 retention thresholds. Staying below them will demote you."
+      suspended: "Your account is currently suspended, so you cannot be promoted."
+      silenced: "Your account is currently silenced, so you cannot be promoted."
+      locked: "Your trust level is locked by staff and is not affected by automatic promotion."
+    requirements:
+      topics_entered: "Topics entered"
+      posts_read: "Posts read"
+      time_read: "Time spent reading"
+      days_visited: "Days visited"
+      likes_given: "Likes given"
+      likes_received: "Likes received"
+      topic_reply_count: "Replied-to topics"
+      topics_replied_to: "Replied-to topics"
+      topics_viewed: "Topics viewed"
+      topics_viewed_all_time: "Topics viewed, all time"
+      posts_read_all_time: "Posts read, all time"
+      likes_received_users: "Users who liked you"
+      likes_received_days: "Days your posts were liked"
+      flagged_posts: "Confirmed flags on your posts"
+      flagged_by_users: "Users with confirmed flags on your posts"
+      penalties: "Silences / suspensions"
+    values:
+      days: "%{count} days"
+      minutes: "%{count} min"
+    footnote: "Numbers match the admin trust level report. Promotion runs as a background job, so this can lag by up to a day."

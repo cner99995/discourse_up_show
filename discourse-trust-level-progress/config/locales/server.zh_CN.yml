@@ -1,0 +1,44 @@
+zh_CN:
+  admin:
+    site_settings:
+      trust_level_progress_enabled:
+        title: "信任等级进度卡片"
+        description: "在用户个人资料摘要页展示其距离下一信任等级的逐项进度。"
+  discourse_trust_level_progress:
+    title: "距离 TL%{target} 的进度（当前 TL%{current}）"
+    title_maintenance: "TL%{level} 保级状态"
+    subtitle_level: "下面每一项都达标后，系统会自动把你提升到 TL%{target}。"
+    subtitle_tl3: "TL3 以最近 %{days} 天为滚动窗口统计，全部达标后系统会自动升级。"
+    subtitle_max: "你已达到最高信任等级，下面是可能触发降级的 TL3 保级条件。"
+    summary_remaining: "还差 %{count} 项"
+    summary_met: "已满足全部条件"
+    summary_maintenance_ok: "保级条件全部达标"
+    summary_maintenance_lost: "%{count} 项低于保级线"
+    hint_site_share: "按全站最近 %{days} 天的活跃量折算"
+    alerts:
+      grace_period: "你正处于 TL3 保级缓冲期，请尽快补齐未达标项以保住 TL3。"
+      requirements_lost: "你已低于 TL3 保级线，持续不达标会被降级。"
+      suspended: "账号当前处于封禁状态，暂时无法升级。"
+      silenced: "账号当前处于禁言状态，暂时无法升级。"
+      locked: "你的信任等级已被管理人员锁定，不受自动升级影响。"
+    requirements:
+      topics_entered: "进入的话题数"
+      posts_read: "阅读帖子数"
+      time_read: "阅读时长"
+      days_visited: "访问天数"
+      likes_given: "送出点赞数"
+      likes_received: "获得点赞数"
+      topic_reply_count: "回复的话题数"
+      topics_replied_to: "回复的话题数"
+      topics_viewed: "浏览的话题数"
+      topics_viewed_all_time: "累计浏览话题数"
+      posts_read_all_time: "累计阅读帖子数"
+      likes_received_users: "点赞过你的用户数"
+      likes_received_days: "获得点赞的天数"
+      flagged_posts: "被举报成立的帖子数"
+      flagged_by_users: "举报成立涉及的用户数"
+      penalties: "禁言 / 封禁次数"
+    values:
+      days: "%{count} 天"
+      minutes: "%{count} 分钟"
+    footnote: "统计口径与后台信任等级报告一致；升级由后台任务执行，可能有一到两天的延迟。"
